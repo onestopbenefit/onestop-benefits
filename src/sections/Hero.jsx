@@ -1,5 +1,24 @@
+import { useState, useEffect } from "react";
 import { IcArrow, IcPhone, IcShield, IcCheck, IcPin, IcChevron } from "../components/icons.jsx";
 import { AGENT } from "../data/agent.js";
+
+const ROTATING = ["trust.", "rely on.", "count on.", "depend on."];
+
+/* Rotating last word of the headline — swaps every ~2.6s with a soft fade+rise
+   (transform+opacity). Holds a single static word under reduced-motion. */
+function RotatingWord() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setI((p) => (p + 1) % ROTATING.length), 2600);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <span className="xhead-rot">
+      <span className="rot-word" key={i}>{ROTATING[i]}</span>
+    </span>
+  );
+}
 
 export default function Hero({ onQuote, onContact }) {
   return (
@@ -11,12 +30,11 @@ export default function Hero({ onQuote, onContact }) {
         <span className="xhero-eyebrow"><span className="dot"></span> Now accepting new clients · Vineland, NJ</span>
         <h1 className="xhead">
           <span className="line"><span>Insurance you can</span></span>
-          <span className="line"><span><span className="accent">trust.</span></span></span>
+          <RotatingWord />
         </h1>
         <p className="xhero-sub">
-          Personalized auto, home, life, and business coverage from a dedicated local
-          agent in Vineland, New Jersey — with clear guidance, honest advice, and
-          someone who answers when you call.
+          A dedicated local agent in Vineland, NJ for auto, home, life, and business —
+          clear guidance and honest advice.
         </p>
         <div className="xhero-cta">
           <button className="cta-card" onClick={onQuote}>

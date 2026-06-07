@@ -82,8 +82,13 @@
 .xhero-photo {
   position: absolute; inset: 0; z-index: 0;
   background: url("/assets/agent-hero.png") no-repeat;
-  background-size: cover; background-position: 72% center;
+  background-size: cover; background-position: 80% center;
 }
+/* Person image — soft slide-in entrance (transform+opacity, one-shot). */
+@media (prefers-reduced-motion: no-preference) {
+  .xhero-photo { animation: photoIn .6s var(--ease-out) both; }
+}
+@keyframes photoIn { from { opacity: 0; transform: translateX(36px) scale(1.03); } to { opacity: 1; transform: none; } }
 .xhero-photo::after {
   content: ""; position: absolute; inset: 0;
   background:
@@ -116,9 +121,20 @@
 .xhero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: #46e39b; box-shadow: 0 0 0 4px rgba(70,227,155,.18); }
 
 .xhead {
-  font-size: clamp(38px, 7vw, 104px); line-height: .96; letter-spacing: -0.04em;
+  font-size: clamp(36px, 5.2vw, 72px); line-height: 1.0; letter-spacing: -0.03em;
   font-weight: 700; max-width: none; color: #fff;
 }
+/* Rotating word — readable cyan gradient, soft fade+rise on each swap. */
+.xhead-rot { display: block; }
+.rot-word {
+  display: inline-block; color: var(--glow-cyan);
+  background: linear-gradient(90deg, #3ABEF9 0%, #9bdcff 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rot-word { animation: wordRise .45s var(--ease-out) both; }
+}
+@keyframes wordRise { from { opacity: 0; transform: translateY(.35em); } to { opacity: 1; transform: translateY(0); } }
 .xhead .accent { color: transparent; -webkit-text-stroke: 1.4px rgba(255,255,255,.55); }
 .xhead .line { display: block; overflow: hidden; white-space: nowrap; }
 .xhead .line > span { display: inline-block; }
@@ -135,7 +151,7 @@
 @keyframes heroRise { from { transform: translateY(110%); } to { transform: translateY(0); } }
 
 .xhero-sub {
-  margin-top: 26px; font-size: clamp(17px, 2vw, 21px); color: #b9c2ea; max-width: 52ch; line-height: 1.55;
+  margin-top: 24px; font-size: clamp(16px, 1.7vw, 20px); color: #b9c2ea; max-width: 40ch; line-height: 1.55;
 }
 @media (prefers-reduced-motion: no-preference) {
   .xhero-sub { animation: heroFade .4s var(--ease-out) .18s both; }
