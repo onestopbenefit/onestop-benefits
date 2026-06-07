@@ -12,11 +12,12 @@
 }
 
 /* ---------- scroll reveal ---------- */
+/* Scroll reveal — fires ONCE per element (IntersectionObserver in Reveal.jsx).
+   transform+opacity only; no permanent will-change. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(34px);
-  transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
-  will-change: opacity, transform;
+  transform: translateY(28px);
+  transition: opacity .4s var(--ease-out), transform .4s var(--ease-out);
 }
 [data-reveal="left"]  { transform: translateX(-46px); }
 [data-reveal="right"] { transform: translateX(46px); }
@@ -105,10 +106,11 @@
 .xhead .accent { color: transparent; -webkit-text-stroke: 1.4px rgba(255,255,255,.55); }
 .xhead .line { display: block; overflow: hidden; white-space: nowrap; }
 .xhead .line > span { display: inline-block; }
+/* Hero headline rise-in — one-shot entrance, short + staggered (ease-out). */
 @media (prefers-reduced-motion: no-preference) {
-  .xhead .line > span { animation: heroRise .95s var(--ease-out) both; }
-  .xhead .line:nth-child(2) > span { animation-delay: .08s; }
-  .xhead .line:nth-child(3) > span { animation-delay: .16s; }
+  .xhead .line > span { animation: heroRise .4s var(--ease-out) both; }
+  .xhead .line:nth-child(2) > span { animation-delay: .07s; }
+  .xhead .line:nth-child(3) > span { animation-delay: .14s; }
 }
 @media (max-width: 560px) {
   .xhead .line { white-space: normal; overflow: visible; }
@@ -120,7 +122,7 @@
   margin-top: 26px; font-size: clamp(17px, 2vw, 21px); color: #b9c2ea; max-width: 52ch; line-height: 1.55;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .xhero-sub { animation: heroFade .9s var(--ease-out) .35s both; }
+  .xhero-sub { animation: heroFade .4s var(--ease-out) .18s both; }
 }
 @keyframes heroFade { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -128,13 +130,13 @@
   margin-top: 40px; display: flex; gap: 16px; align-items: stretch; flex-wrap: wrap;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .xhero-cta { animation: heroFade .9s var(--ease-out) .5s both; }
+  .xhero-cta { animation: heroFade .4s var(--ease-out) .28s both; }
 }
 .cta-card {
   display: flex; align-items: center; justify-content: space-between; gap: 40px;
   background: var(--brand-grad); color: #fff; border: none; cursor: pointer;
   border-radius: 18px; padding: 22px 24px; min-width: 280px; text-align: left;
-  box-shadow: 0 20px 50px rgba(20,48,207,.4); transition: transform .2s ease, box-shadow .2s ease;
+  box-shadow: 0 20px 50px rgba(20,48,207,.4); transition: transform .2s ease;
 }
 .cta-card:hover { transform: translateY(-3px); box-shadow: 0 26px 60px rgba(20,48,207,.5); }
 .cta-card .l { display: flex; flex-direction: column; gap: 3px; }
@@ -157,7 +159,7 @@
   width: 100%; max-width: var(--maxw); padding: 0 28px;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .xhero-foot { animation: heroFadeY 1s ease .75s both; }
+  .xhero-foot { animation: heroFadeY .45s ease .4s both; }
 }
 @keyframes heroFadeY { from { opacity: 0; } to { opacity: 1; } }
 .xhero-foot-in { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
@@ -170,7 +172,8 @@
   width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
   display: grid; place-items: center; color: #fff;
 }
-.scroll-cue svg { width: 20px; height: 20px; animation: bob 1.8s ease-in-out infinite; }
+/* Scroll affordance — nudges 3x on load to direct attention, then stops (no perpetual loop). */
+.scroll-cue svg { width: 20px; height: 20px; animation: bob 1.6s ease-in-out 3; }
 @keyframes bob { 0%,100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
 
 /* ===========================================================
@@ -184,7 +187,7 @@
           mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
 .marquee-track { display: flex; align-items: center; gap: 14px; width: max-content; animation: scrollx 48s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee:hover .marquee-track, .marquee.is-paused .marquee-track { animation-play-state: paused; }
 .marquee-chip {
   display: inline-flex; align-items: center; gap: 11px; white-space: nowrap;
   padding: 11px 22px; border: 1px solid rgba(255,255,255,.12); border-radius: 100px;
@@ -205,19 +208,18 @@
 .ripple-bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .ripple-grid { position: absolute; inset: -1px; display: grid; }
 .ripple-cell {
-  margin: 0; padding: 0; background: transparent; cursor: pointer;
+  position: relative; margin: 0; padding: 0; background: transparent; cursor: pointer;
   border: 1px solid rgba(255,255,255,.05);
-  transition: background .25s ease, border-color .25s ease;
 }
-.ripple-cell:hover { background: rgba(58,190,249,.16); border-color: rgba(58,190,249,.35); }
+/* flash via a pseudo-element's opacity (compositor-friendly, no paint of bg color) */
+.ripple-cell::after { content: ""; position: absolute; inset: 0; background: var(--glow-cyan); opacity: 0; }
 .ripple-cell:focus { outline: none; }
-.has-ripple .ripple-cell { animation: ripplePulse .6s ease-out backwards; animation-delay: var(--delay); }
-@keyframes ripplePulse {
-  0%   { background: rgba(58,190,249,.5); }
-  60%  { background: rgba(58,190,249,.12); }
-  100% { background: transparent; }
+@media (hover: hover) {
+  .ripple-cell:hover::after { opacity: .16; transition: opacity .2s ease; }
 }
-@media (prefers-reduced-motion: reduce) { .has-ripple .ripple-cell { animation: none; } }
+.has-ripple .ripple-cell::after { animation: ripplePulse .55s ease-out backwards; animation-delay: var(--delay); }
+@keyframes ripplePulse { 0% { opacity: .5; } 60% { opacity: .12; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .has-ripple .ripple-cell::after { animation: none; } }
 
 /* coming-soon product card (Coverage gallery) */
 .pgcard.soon { cursor: default; border-style: dashed; border-color: rgba(255,255,255,.18);
@@ -308,6 +310,7 @@
   display: flex; flex-direction: column; background: #fff; position: relative; overflow: hidden;
   transition: border-color .25s ease, box-shadow .25s ease;
 }
+.step-card { transition: border-color .25s ease; }
 .step-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); }
 .step-card h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; max-width: 14ch; }
 .step-card p { font-size: 15px; color: var(--muted); margin-top: 12px; line-height: 1.6; max-width: 34ch; }
@@ -370,4 +373,28 @@
   .xcontact-cards { grid-template-columns: 1fr; }
   .xhero-foot { position: static; transform: none; margin-top: 40px; padding: 0 20px; }
   .scroll-cue { display: none; }
+}
+
+/* ===========================================================
+   MICRO-INTERACTIONS  (appended last so these win the cascade)
+   =========================================================== */
+
+/* Mobile menu entrance — dropdown enter from its origin (opacity + slide). */
+@keyframes menuIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* Press feedback — tactile confirmation on tap/click. transform-only, instant. */
+.btn:not(:disabled):active { transform: scale(.97); }
+.cta-card:active { transform: scale(.98); }
+.pgcard:not(.soon):active { transform: scale(.98); }
+
+/* Touch devices have no real hover — drop hover lifts so they can't stick after a tap. */
+@media (hover: none) {
+  .btn-primary:hover, .cta-card:hover, .pgcard:hover, .why-card:hover { transform: none; }
+}
+
+/* Reduced-motion: neutralize the remaining/added motion (instant or opacity-only). */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .scroll-cue svg, .success-ic, .mobile-menu { animation: none !important; }
+  .btn:not(:disabled):active, .cta-card:active, .pgcard:active { transform: none; }
 }
