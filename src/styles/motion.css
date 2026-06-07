@@ -91,6 +91,22 @@
     linear-gradient(100deg, #060a26 25%, rgba(6,10,38,.72) 44%, rgba(6,10,38,.1) 66%, rgba(6,10,38,.4) 100%);
 }
 
+/* Hero breathing glow — requested subtle, slow brand-light pulse.
+   Animates opacity + scale only (compositor); disabled under reduced-motion. */
+.xhero-glow {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: .6;
+  background:
+    radial-gradient(38% 48% at 78% 24%, rgba(58,190,249,.20), transparent 70%),
+    radial-gradient(46% 56% at 16% 82%, rgba(60,125,255,.22), transparent 70%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .xhero-glow { animation: heroBreathe 11s ease-in-out infinite; }
+}
+@keyframes heroBreathe {
+  0%, 100% { opacity: .5; transform: scale(1); }
+  50%      { opacity: .82; transform: scale(1.06); }
+}
+
 .xhero-eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 600; letter-spacing: .04em;
@@ -363,15 +379,22 @@
   .hgal-sticky { height: auto; position: static; padding: 64px 0; }
   .hgal-head { position: static; padding: 0 0 30px; }
   .hgal-head .xtitle { max-width: none; }
-  .xhero-photo { background-position: 76% center; }
-  .xhero-photo::after { background: linear-gradient(to top, #060a26 3%, rgba(6,10,38,.5) 56%, rgba(6,10,38,.72) 100%); }
+
+  /* Mobile hero — declutter: drop the photo + trust tags, shrink type, stack CTAs */
+  .xhero-photo { display: none; }
+  .xhero { min-height: 84svh; padding: calc(var(--header-h) + 22px) 0 56px; }
+  .xhead { font-size: 34px; letter-spacing: -0.03em; }
+  .xhero-sub { font-size: 16px; line-height: 1.55; margin-top: 18px; max-width: none; }
+  .xhero-cta { flex-direction: column; align-items: stretch; gap: 12px; margin-top: 26px; }
+  .cta-card { min-width: 0; width: 100%; }
+  .cta-ghost { width: 100%; justify-content: center; height: 52px; padding: 0 22px; }
   .hgal-giant { display: none; }
   .hgal-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 10px; margin-top: 0; transform: none !important; }
   .pgcard { scroll-snap-align: center; width: 78vw; }
   .hgal-progress { display: none; }
   .hgal[data-track] { height: auto !important; }
   .xcontact-cards { grid-template-columns: 1fr; }
-  .xhero-foot { position: static; transform: none; margin-top: 40px; padding: 0 20px; }
+  .xhero-foot { display: none; }
   .scroll-cue { display: none; }
 }
 

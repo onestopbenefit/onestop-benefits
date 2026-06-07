@@ -5,6 +5,7 @@ export default function Hero({ onQuote, onContact }) {
   return (
     <section className="xhero">
       <div className="xhero-photo" aria-hidden="true"></div>
+      <div className="xhero-glow" aria-hidden="true"></div>
 
       <div className="wrap">
         <span className="xhero-eyebrow"><span className="dot"></span> Now accepting new clients · Vineland, NJ</span>
