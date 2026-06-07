@@ -12,15 +12,21 @@ const SPECIALTIES = [
 export default function About({ onQuote, onContact }) {
   return (
     <section id="about">
-      {/* full-width brand banner with headshot */}
+      {/* brand banner — agent profile: text + framed headshot + trust chips */}
       <div className="about-banner">
         <div className="about-banner-bg" aria-hidden="true"></div>
-        <img className="about-avatar" src={AGENT.photo} alt={`${AGENT.name}, ${AGENT.title}`} loading="lazy" decoding="async" />
-        <div className="about-banner-overlay">
-          <div className="wrap about-banner-inner">
+        <div className="wrap about-banner-grid">
+          <div className="about-banner-text">
             <span className="pill"><IcPin /> Serving {AGENT.states.join(", ")}</span>
             <h1>{AGENT.name}</h1>
             <p className="role">{AGENT.title}</p>
+            <div className="about-chips">
+              <span><IcShield /> NJ Licensed · #{AGENT.license}</span>
+              <span><IcCheck /> Free, no-obligation quotes</span>
+            </div>
+          </div>
+          <div className="about-banner-photo">
+            <img src={AGENT.photo} alt={`${AGENT.name}, ${AGENT.title}`} loading="lazy" decoding="async" />
           </div>
         </div>
       </div>

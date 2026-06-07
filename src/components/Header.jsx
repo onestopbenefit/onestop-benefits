@@ -39,7 +39,7 @@ export default function Header({ active, onNav, onQuote }) {
               >
                 {l.label}
               </a>
-              {l.id === "products" && (
+              {l.id === "about" && (
                 <span className="nav-soon" tabIndex={0}>
                   Medical<span className="soon-tip">Coming soon</span>
                 </span>
@@ -66,7 +66,7 @@ export default function Header({ active, onNav, onQuote }) {
           {NAV_LINKS.map((l) => (
             <Fragment key={l.id}>
               <a onClick={go(l.id)}>{l.label}</a>
-              {l.id === "products" && (
+              {l.id === "about" && (
                 <span className="mob-soon">Medical <em>Coming soon</em></span>
               )}
             </Fragment>

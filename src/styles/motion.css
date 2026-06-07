@@ -376,6 +376,7 @@
   .xsection { padding: 80px 0; }
 }
 @media (max-width: 760px) {
+  .xsection { padding: 60px 0; }
   .hgal-sticky { height: auto; position: static; padding: 64px 0; }
   .hgal-head { position: static; padding: 0 0 30px; }
   .hgal-head .xtitle { max-width: none; }

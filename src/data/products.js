@@ -81,7 +81,5 @@ export const MARQUEE = [
 export const NAV_LINKS = [
   { id: "top", label: "Home" },
   { id: "products", label: "Insurance" },
-  { id: "quote", label: "Get a Quote" },
   { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
 ];

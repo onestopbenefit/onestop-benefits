@@ -259,24 +259,21 @@ select.control { appearance: none; cursor: pointer;
 /* ===========================================================
    ABOUT SECTION
    =========================================================== */
-.about-banner { position: relative; min-height: 420px; background: var(--brand-grad); overflow: hidden; }
+.about-banner { position: relative; background: var(--brand-grad); overflow: hidden; padding: calc(var(--header-h) + 64px) 0 64px; }
 .about-banner-bg { position: absolute; inset: 0; }
 .about-banner-bg::before { content: ""; position: absolute; right: -120px; top: -120px; width: 460px; height: 460px; border-radius: 50%; background: rgba(255,255,255,.08); }
-.about-banner-bg::after { content: ""; position: absolute; left: 40%; bottom: -160px; width: 380px; height: 380px; border-radius: 50%; background: rgba(255,255,255,.06); }
-.about-avatar {
-  position: absolute; right: 8%; top: 50%; transform: translateY(-50%);
-  width: 230px; height: 230px; border-radius: 50%; object-fit: cover; object-position: center top;
-  border: 6px solid rgba(255,255,255,.9); box-shadow: 0 24px 60px rgba(4,9,70,.5);
-}
-.about-banner-overlay {
-  position: absolute; inset: 0; display: flex; align-items: flex-end;
-  background: linear-gradient(to top, rgba(4,9,70,.9) 0%, rgba(5,12,120,.45) 45%, rgba(5,12,156,.15) 100%);
-}
-.about-banner-inner { padding-bottom: 48px; padding-top: 90px; color: #fff; }
-.about-banner .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.16); backdrop-filter: blur(6px); color: #fff; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 100px; margin-bottom: 18px; }
+.about-banner-bg::after { content: ""; position: absolute; left: 28%; bottom: -200px; width: 420px; height: 420px; border-radius: 50%; background: rgba(255,255,255,.06); }
+.about-banner-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+.about-banner-text { color: #fff; }
+.about-banner .pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(6px); color: #fff; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 100px; margin-bottom: 20px; }
 .about-banner .pill svg { width: 15px; height: 15px; }
-.about-banner h1 { color: #fff; font-size: clamp(36px, 6vw, 64px); letter-spacing: -0.035em; }
-.about-banner .role { color: rgba(255,255,255,.9); font-size: 19px; font-weight: 600; margin-top: 10px; }
+.about-banner h1 { color: #fff; font-size: clamp(36px, 6vw, 60px); letter-spacing: -0.035em; }
+.about-banner .role { color: rgba(255,255,255,.92); font-size: 19px; font-weight: 600; margin-top: 10px; }
+.about-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.about-chips span { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(6px); color: #fff; font-size: 13px; font-weight: 600; padding: 9px 14px; border-radius: 100px; }
+.about-chips svg { width: 16px; height: 16px; flex: none; }
+.about-banner-photo { position: relative; }
+.about-banner-photo img { display: block; width: 100%; max-width: 320px; aspect-ratio: 1; object-fit: cover; object-position: center top; margin-left: auto; border-radius: 26px; border: 5px solid rgba(255,255,255,.92); box-shadow: 0 26px 60px rgba(4,9,70,.5); }
 
 .about-body { display: grid; grid-template-columns: 1.6fr 1fr; gap: 56px; align-items: start; }
 .about-prose h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 20px; }
@@ -315,10 +312,12 @@ select.control { appearance: none; cursor: pointer;
   .footer-grid { grid-template-columns: 1fr; gap: 30px; }
   .footer-bottom { flex-direction: column; }
   .cta-band { padding: 38px 28px; }
-  .about-avatar { width: 150px; height: 150px; right: 50%; top: 60px; transform: translateX(50%); }
-  .about-banner { min-height: 460px; }
-  .about-banner-inner { text-align: center; padding-top: 230px; }
+  .about-banner { padding: calc(var(--header-h) + 36px) 0 48px; }
+  .about-banner-grid { grid-template-columns: 1fr; gap: 26px; text-align: center; }
+  .about-banner-photo { order: -1; }
+  .about-banner-photo img { margin: 0 auto; max-width: 200px; }
   .about-banner .pill { margin-left: auto; margin-right: auto; }
+  .about-chips { justify-content: center; }
 }
 @media (max-width: 560px) {
   .products-grid { grid-template-columns: 1fr; }
