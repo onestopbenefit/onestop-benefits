@@ -5,7 +5,9 @@ import { IcArrow, IcLock, IcCheckBig, IcPhone, IcCheck } from "../components/ico
 import { AGENT } from "../data/agent.js";
 import { FORM_PRODUCTS } from "../data/products.js";
 
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+// Sanitize: strip any stray whitespace / BOM / non-id characters so a bad
+// env value (e.g. a BOM from a shell pipe) can't corrupt the endpoint.
+const FORMSPREE_ID = (import.meta.env.VITE_FORMSPREE_ID || "").replace(/[^A-Za-z0-9]/g, "");
 
 const EMPTY = {
   first: "", last: "", email: "", phone: "",
