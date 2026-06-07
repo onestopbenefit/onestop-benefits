@@ -22,6 +22,7 @@ export const IcBundle = () => <S><path d="M12 3l8 4.2-8 4.2-8-4.2z"/><path d="M4
 export const IcBundle2 = () => <S><rect x="4" y="4" width="11" height="11" rx="1.6"/><rect x="9" y="9" width="11" height="11" rx="1.6" fill="#fff"/></S>;
 export const IcMoto = () => <S><circle cx="5.5" cy="15.5" r="3"/><circle cx="18.5" cy="15.5" r="3"/><path d="M5.5 15.5l3.5-5h4l2 5"/><path d="M9 10.5h5.5l1.5 2.5M11 7.5h3"/></S>;
 export const IcFinancial = () => <S><path d="M4 20h16"/><path d="M7 16l3.5-4 3 2.5L20 7"/><path d="M16 7h4v4"/></S>;
+export const IcMedical = () => <S><rect x="4" y="4" width="16" height="16" rx="4.5"/><path d="M12 8.5v7M8.5 12h7"/></S>;
 
 /* ---- UI icons ---- */
 export const IcShield = () => <S><path d="M12 3l7 2.5v5c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9v-5z"/><path d="M9 12l2 2 4-4"/></S>;

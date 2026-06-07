@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import BrandLogo from "./BrandLogo.jsx";
 import Button from "./Button.jsx";
 import { IcShield, IcMenu, IcClose } from "./icons.jsx";
@@ -31,14 +31,20 @@ export default function Header({ active, onNav, onQuote }) {
 
         <nav className="nav" aria-label="Primary">
           {NAV_LINKS.map((l) => (
-            <a
-              key={l.id}
-              className={active === l.id ? "active" : ""}
-              aria-current={active === l.id ? "true" : undefined}
-              onClick={go(l.id)}
-            >
-              {l.label}
-            </a>
+            <Fragment key={l.id}>
+              <a
+                className={active === l.id ? "active" : ""}
+                aria-current={active === l.id ? "true" : undefined}
+                onClick={go(l.id)}
+              >
+                {l.label}
+              </a>
+              {l.id === "products" && (
+                <span className="nav-soon" tabIndex={0}>
+                  Medical<span className="soon-tip">Coming soon</span>
+                </span>
+              )}
+            </Fragment>
           ))}
           <Button size="sm" className="nav-cta" icon={<IcShield />} onClick={onQuote}>
             Get a Quote
@@ -58,7 +64,12 @@ export default function Header({ active, onNav, onQuote }) {
       {open && (
         <div className="mobile-menu">
           {NAV_LINKS.map((l) => (
-            <a key={l.id} onClick={go(l.id)}>{l.label}</a>
+            <Fragment key={l.id}>
+              <a onClick={go(l.id)}>{l.label}</a>
+              {l.id === "products" && (
+                <span className="mob-soon">Medical <em>Coming soon</em></span>
+              )}
+            </Fragment>
           ))}
           <Button className="btn-block" icon={<IcShield />} onClick={onQuote}>Get a Quote</Button>
         </div>

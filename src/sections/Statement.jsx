@@ -1,8 +1,10 @@
 import Reveal from "../components/Reveal.jsx";
+import BackgroundRipple from "../components/BackgroundRipple.jsx";
 
 export default function Statement() {
   return (
-    <section className="xsection darker">
+    <section className="xsection darker ripple-section">
+      <BackgroundRipple />
       <div className="wrap">
         <Reveal><span className="xeyebrow">Onestop Benefits</span></Reveal>
         <Reveal delay={0.08}>
