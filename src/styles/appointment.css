@@ -1,0 +1,76 @@
+/* ===========================================================
+   Onestop Benefits — Appointment request section (#quote)
+   =========================================================== */
+
+.appt-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: start; }
+
+/* aside (on the dark section) */
+.appt-aside .lead { color: rgba(255,255,255,.66); margin-top: 18px; max-width: 40ch; }
+.appt-steps { margin-top: 30px; display: flex; flex-direction: column; gap: 2px; }
+.qstep { display: flex; gap: 15px; padding: 13px 0; }
+.qstep-n { width: 30px; height: 30px; border-radius: 50%; background: rgba(58,190,249,.15); color: var(--glow-cyan); font-size: 14px; font-weight: 700; display: grid; place-items: center; flex: none; }
+.qstep .t { font-size: 15.5px; font-weight: 600; color: #fff; }
+.qstep .s { font-size: 13.5px; color: rgba(255,255,255,.6); margin-top: 2px; }
+.appt-talk { margin-top: 26px; display: flex; gap: 14px; align-items: center; padding: 16px 18px; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(255,255,255,.03); }
+.appt-talk .ic { width: 44px; height: 44px; border-radius: 11px; background: rgba(255,255,255,.08); color: var(--glow-cyan); display: grid; place-items: center; flex: none; }
+.appt-talk .ic svg { width: 21px; height: 21px; }
+.appt-talk .k { font-size: 13px; color: rgba(255,255,255,.6); font-weight: 600; }
+.appt-talk .v { font-size: 18px; font-weight: 700; color: #fff; }
+.appt-talk .v a:hover { color: var(--glow-cyan); }
+
+/* white form panel */
+.appt-panel { background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-lg); padding: 34px; color: var(--ink); }
+.appt-panel-head h3 { font-size: 22px; }
+.appt-panel-head .panel-sub { font-size: 14px; color: var(--muted); margin-top: 6px; margin-bottom: 24px; }
+
+/* form grid */
+.qform { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.qform .full { grid-column: 1 / -1; }
+
+/* fieldset reset */
+.fset { border: none; padding: 0; margin: 0; min-width: 0; }
+.fset.full { grid-column: 1 / -1; }
+.fset > legend { padding: 0; font-size: 13px; font-weight: 600; color: var(--ink-2); margin-bottom: 11px; }
+.fset .req { color: var(--accent); }
+.fset .hint { font-weight: 400; color: var(--faint); }
+.fset .error { font-size: 12.5px; color: var(--err); font-weight: 500; margin-top: 8px; display: block; }
+
+/* radio pills */
+.radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+.radio-opt { display: inline-flex; align-items: center; gap: 10px; padding: 0 18px; height: 46px; border: 1px solid var(--line-2); border-radius: 10px; cursor: pointer; font-size: 14.5px; font-weight: 600; color: var(--ink-2); transition: border-color .14s, background .14s, color .14s; }
+.radio-opt:hover { border-color: var(--ink-2); }
+.radio-opt input { width: 16px; height: 16px; accent-color: var(--accent); }
+.radio-opt.checked { border-color: var(--accent); background: var(--accent-tint); color: var(--accent-700); }
+
+/* checkbox grid */
+.check-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.check-opt { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border: 1px solid var(--line-2); border-radius: 10px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--ink-2); transition: border-color .14s, background .14s, color .14s; }
+.check-opt:hover { border-color: var(--ink-2); }
+.check-opt input { width: 17px; height: 17px; accent-color: var(--accent); flex: none; }
+.check-opt.checked { border-color: var(--accent); background: var(--accent-tint); color: var(--accent-700); font-weight: 600; }
+
+/* submit footer */
+.qform-foot { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+.appt-fine { font-size: 12.5px; color: var(--muted); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.appt-fine svg { width: 15px; height: 15px; color: var(--accent); flex: none; margin-top: 2px; }
+
+/* live status region */
+.form-status { grid-column: 1 / -1; font-size: 14px; font-weight: 600; padding: 12px 14px; border-radius: 10px; }
+.form-status.err { background: rgba(194,65,12,.1); color: var(--err); border: 1px solid rgba(194,65,12,.25); }
+
+/* spinner */
+.spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,.4); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 1.6s; } }
+
+/* honeypot — visually & semantically hidden, off-screen */
+.hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+@media (max-width: 980px) {
+  .appt-grid { grid-template-columns: 1fr; gap: 38px; }
+}
+@media (max-width: 560px) {
+  .qform { grid-template-columns: 1fr; }
+  .check-grid { grid-template-columns: 1fr 1fr; }
+  .appt-panel { padding: 24px; }
+}
