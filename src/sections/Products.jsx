@@ -26,17 +26,28 @@ export default function Products({ onPick }) {
       const rect = sec.getBoundingClientRect();
       const total = sec.offsetHeight - window.innerHeight;
       const prog = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-      track.style.transform = "translateX(" + (-prog * maxX) + "px)";
+      // round + translate3d -> GPU-composited, no subpixel jitter
+      track.style.transform = "translate3d(" + (-Math.round(prog * maxX)) + "px,0,0)";
       if (fill) fill.style.width = (prog * 100) + "%";
     };
 
+    // throttle scroll work to one update per animation frame
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    };
+
     layout();
-    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", layout);
+    window.addEventListener("load", layout);
     const t = setTimeout(layout, 300); // after fonts settle
     return () => {
-      window.removeEventListener("scroll", update);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", layout);
+      window.removeEventListener("load", layout);
       clearTimeout(t);
     };
   }, []);

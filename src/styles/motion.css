@@ -52,7 +52,7 @@
    CINEMATIC HERO
    =========================================================== */
 .xhero {
-  position: relative; min-height: 100vh; display: flex; align-items: center;
+  position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: center;
   padding: calc(var(--header-h) + 40px) 0 80px; overflow: hidden;
   background:
     radial-gradient(120% 90% at 80% 0%, #11225e 0%, transparent 55%),
@@ -175,16 +175,24 @@
    MARQUEE (coverage types)
    =========================================================== */
 .marquee {
-  background: var(--ink-dark); border-top: 1px solid rgba(255,255,255,.07);
-  border-bottom: 1px solid rgba(255,255,255,.07); padding: 26px 0; overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  background: linear-gradient(90deg, #070d33 0%, #060a26 50%, #070d33 100%);
+  border-top: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08); padding: 22px 0; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
 }
-.marquee-track { display: flex; gap: 0; width: max-content; animation: scrollx 32s linear infinite; }
+.marquee-track { display: flex; align-items: center; gap: 14px; width: max-content; animation: scrollx 48s linear infinite; }
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-item { display: inline-flex; align-items: center; gap: 18px; padding: 0 26px; font-size: clamp(20px, 2.6vw, 30px); font-weight: 700; letter-spacing: -0.02em; color: rgba(255,255,255,.34); white-space: nowrap; }
-.marquee-item .star { color: var(--glow-cyan); font-size: .7em; }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+.marquee-chip {
+  display: inline-flex; align-items: center; gap: 11px; white-space: nowrap;
+  padding: 11px 22px; border: 1px solid rgba(255,255,255,.12); border-radius: 100px;
+  background: rgba(255,255,255,.04); font-size: 15.5px; font-weight: 600;
+  letter-spacing: -0.01em; color: rgba(255,255,255,.82);
+  transition: border-color .2s ease, background .2s ease, color .2s ease;
+}
+.marquee-chip:hover { border-color: rgba(58,190,249,.55); background: rgba(58,190,249,.08); color: #fff; }
+.marquee-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--glow-cyan); flex: none; box-shadow: 0 0 0 3px rgba(58,190,249,.16); }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; } }
 @keyframes scrollx { to { transform: translateX(-50%); } }
 
 /* ===========================================================
@@ -223,13 +231,15 @@
    =========================================================== */
 .hgal { position: relative; background: radial-gradient(120% 100% at 50% 0%, #0a1556 0%, #060a26 65%); color: #fff; }
 .hgal-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-.hgal-head { position: absolute; top: 0; left: 0; right: 0; padding: calc(var(--header-h) + 36px) 0 0; z-index: 3; }
+.hgal-head { position: absolute; top: 0; left: 0; right: 0; padding: calc(var(--header-h) + 60px) 0 0; z-index: 3; }
+.hgal-head .xeyebrow { margin-bottom: 18px; }
+.hgal-head .xtitle { margin-top: 6px; max-width: 17ch; }
 .hgal-giant {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -54%);
   font-size: clamp(120px, 30vw, 460px); font-weight: 700; letter-spacing: -0.05em;
   color: rgba(255,255,255,.06); white-space: nowrap; pointer-events: none; z-index: 1; line-height: 1;
 }
-.hgal-track { display: flex; gap: 22px; padding: 0 max(28px, calc((100vw - var(--maxw)) / 2)); position: relative; z-index: 2; will-change: transform; }
+.hgal-track { display: flex; gap: 24px; margin-top: 56px; padding: 0 max(28px, calc((100vw - var(--maxw)) / 2)); position: relative; z-index: 2; will-change: transform; backface-visibility: hidden; }
 .pgcard {
   flex: none; width: 320px; height: 380px; border-radius: 22px; padding: 28px;
   background: linear-gradient(165deg, rgba(58,190,249,.16), rgba(20,48,207,.1));
@@ -310,11 +320,13 @@
   .xsection { padding: 80px 0; }
 }
 @media (max-width: 760px) {
-  .hgal-sticky { height: auto; position: static; padding: 90px 0; }
+  .hgal-sticky { height: auto; position: static; padding: 64px 0; }
+  .hgal-head { position: static; padding: 0 0 30px; }
+  .hgal-head .xtitle { max-width: none; }
   .xhero-photo { background-position: 76% center; }
   .xhero-photo::after { background: linear-gradient(to top, #060a26 3%, rgba(6,10,38,.5) 56%, rgba(6,10,38,.72) 100%); }
   .hgal-giant { display: none; }
-  .hgal-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 10px; transform: none !important; }
+  .hgal-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 10px; margin-top: 0; transform: none !important; }
   .pgcard { scroll-snap-align: center; width: 78vw; }
   .hgal-progress { display: none; }
   .hgal[data-track] { height: auto !important; }

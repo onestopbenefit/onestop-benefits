@@ -7,21 +7,22 @@ export default function Hero({ onQuote, onContact }) {
       <div className="xhero-photo" aria-hidden="true"></div>
 
       <div className="wrap">
-        <span className="xhero-eyebrow"><span className="dot"></span> Accepting new clients · Vineland, NJ</span>
+        <span className="xhero-eyebrow"><span className="dot"></span> Now accepting new clients · Vineland, NJ</span>
         <h1 className="xhead">
-          <span className="line"><span>Insurance that</span></span>
-          <span className="line"><span>has your <span className="accent">back.</span></span></span>
+          <span className="line"><span>Insurance you can</span></span>
+          <span className="line"><span><span className="accent">trust.</span></span></span>
         </h1>
         <p className="xhero-sub">
-          One local agent in Vineland for auto, home, renters, life, business and more.
-          Real coverage, straight answers, no runaround.
+          Personalized auto, home, life, and business coverage from a dedicated local
+          agent in Vineland, New Jersey — with clear guidance, honest advice, and
+          someone who answers when you call.
         </p>
         <div className="xhero-cta">
           <button className="cta-card" onClick={onQuote}>
-            <span className="l"><b>Get a free quote</b><span>Takes about a minute</span></span>
+            <span className="l"><b>Request a free quote</b><span>Takes about a minute</span></span>
             <span className="arrow"><IcArrow /></span>
           </button>
-          <button className="cta-ghost" onClick={onContact}><IcPhone /> Contact me</button>
+          <button className="cta-ghost" onClick={onContact}><IcPhone /> Get in touch</button>
         </div>
       </div>
 

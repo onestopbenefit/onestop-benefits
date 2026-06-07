@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import BrandLogo from "./BrandLogo.jsx";
 import Button from "./Button.jsx";
 import { IcShield, IcMenu, IcClose } from "./icons.jsx";
-import { AGENT } from "../data/agent.js";
 import { NAV_LINKS } from "../data/products.js";
 import { useScrolled } from "../hooks/useScrolled.js";
 
@@ -27,8 +26,7 @@ export default function Header({ active, onNav, onQuote }) {
     <header className={cls}>
       <div className="wrap header-inner">
         <button className="brand" onClick={() => onNav("top")} aria-label="Onestop Benefits — home">
-          <BrandLogo />
-          <span className="brand-sub">{AGENT.tagline}</span>
+          <BrandLogo height={46} />
         </button>
 
         <nav className="nav" aria-label="Primary">
