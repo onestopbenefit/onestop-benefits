@@ -1,51 +1,66 @@
+import { useState } from "react";
 import Button from "../components/Button.jsx";
-import { IcPin, IcShield, IcPhone, IcCheck } from "../components/icons.jsx";
-import { AGENT } from "../data/agent.js";
-
-const SPECIALTIES = [
-  "Auto & Home bundles",
-  "Life & financial planning",
-  "Small-business coverage",
-  "Renters & condo",
-];
+import { IcPin, IcShield, IcPhone, IcCheck, IcMail } from "../components/icons.jsx";
+import { AGENT, TEAM } from "../data/agent.js";
 
 export default function About({ onQuote, onContact }) {
+  const [activeId, setActiveId] = useState(TEAM[0].id);
+  const person = TEAM.find((m) => m.id === activeId) || TEAM[0];
+
   return (
     <section id="about">
-      {/* brand banner — agent profile: text + framed headshot + trust chips */}
+      {/* brand banner — interactive team profile: tap a person to swap details */}
       <div className="about-banner">
         <div className="about-banner-bg" aria-hidden="true"></div>
-        <div className="wrap about-banner-grid">
-          <div className="about-banner-text">
-            <span className="pill"><IcPin /> Serving {AGENT.states.join(", ")}</span>
-            <h1>{AGENT.name}</h1>
-            <p className="role">{AGENT.title}</p>
-            <div className="about-chips">
-              <span><IcShield /> NJ Licensed · #{AGENT.license}</span>
-              <span><IcCheck /> Free, no-obligation quotes</span>
-            </div>
+        <div className="wrap">
+          <span className="pill"><IcPin /> Serving {AGENT.states.join(", ")}</span>
+
+          {/* person tabs */}
+          <div className="team-tabs" role="tablist" aria-label="Meet the team">
+            {TEAM.map((m) => (
+              <button
+                key={m.id}
+                role="tab"
+                aria-selected={m.id === activeId}
+                className={"team-tab" + (m.id === activeId ? " active" : "")}
+                onClick={() => setActiveId(m.id)}
+              >
+                <img src={m.photo} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                <span className="team-tab-id">
+                  <b>{m.name}</b>
+                  <span>{m.position}</span>
+                </span>
+              </button>
+            ))}
           </div>
-          <div className="about-banner-photo">
-            <img src={AGENT.photo} alt={`${AGENT.name}, ${AGENT.title}`} loading="lazy" decoding="async" />
+
+          {/* active profile — keyed so it re-animates on switch */}
+          <div className="about-banner-grid team-panel" key={person.id}>
+            <div className="about-banner-text">
+              <span className="team-position">{person.position}</span>
+              <h1>{person.name}</h1>
+              <p className="role">{person.role}</p>
+              <div className="about-chips">
+                {person.creds.map((c) => <span key={c}><IcShield /> {c}</span>)}
+                <span><IcMail /> <a href={`mailto:${person.email}`}>{person.email}</a></span>
+              </div>
+            </div>
+            <div className="about-banner-photo">
+              <img src={person.photo} alt={`${person.name}, ${person.position}`} loading="lazy" decoding="async" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* bio + facts */}
+      {/* bio + facts for the selected person */}
       <div className="section" style={{ background: "#fff" }}>
-        <div className="wrap about-body">
+        <div className="wrap about-body" key={person.id}>
           <div className="about-prose">
-            <span className="eyebrow">About me</span>
-            <h2>A neighbor you can call your insurance agent.</h2>
-            <p className="first">
-              I'm {AGENT.name}, a local insurance agent here in Vineland. My job is simple: help you
-              figure out what coverage actually fits your life — your car, your home, your business,
-              or the people who depend on you.
-            </p>
-            <p>
-              I'll walk you through your options in plain English so you know exactly what you're
-              paying for. Give me a call and let's talk.
-            </p>
+            <span className="eyebrow">About {person.first}</span>
+            <h2>{person.position === "Manager"
+              ? "Health coverage, made human."
+              : "A neighbor you can call your insurance agent."}</h2>
+            <p className="first">{person.blurb}</p>
             <div style={{ display: "flex", gap: 12, marginTop: 28, flexWrap: "wrap" }}>
               <Button size="lg" icon={<IcShield />} onClick={onQuote}>Get a Quote</Button>
               <Button size="lg" variant="secondary" icon={<IcPhone />} onClick={onContact}>Contact Me</Button>
@@ -54,20 +69,20 @@ export default function About({ onQuote, onContact }) {
 
           <aside className="about-side">
             <div className="fact-card">
-              <h4>NJ License</h4>
-              <div className="big">#{AGENT.license}</div>
-              <p style={{ fontSize: "13.5px", color: "var(--muted)", marginTop: "6px" }}>Licensed insurance producer</p>
+              <h4>Role</h4>
+              <div className="big">{person.position}</div>
+              <p style={{ fontSize: "13.5px", color: "var(--muted)", marginTop: "6px" }}>{person.role}</p>
             </div>
             <div className="fact-card">
-              <h4>Licensed in</h4>
+              <h4>Credentials</h4>
               <div className="chips">
-                {AGENT.states.map((s) => <span key={s} className="chip">{s}</span>)}
+                {person.creds.map((c) => <span key={c} className="chip">{c}</span>)}
               </div>
             </div>
             <div className="fact-card">
               <h4>Specialties</h4>
               <ul className="spec-list">
-                {SPECIALTIES.map((s) => <li key={s}><IcCheck /> {s}</li>)}
+                {person.specialties.map((s) => <li key={s}><IcCheck /> {s}</li>)}
               </ul>
             </div>
           </aside>

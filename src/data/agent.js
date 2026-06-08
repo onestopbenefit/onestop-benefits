@@ -33,5 +33,47 @@ export const AGENT = {
   states: ["New Jersey"],
 };
 
+/* The people behind Onestop Benefits. Rendered as interactive tabs in the
+   About section — tap a person to swap in their profile. Shelby is the lead
+   property/casualty agent; Sini manages the health/medical side. */
+export const TEAM = [
+  {
+    id: "shelby",
+    name: "Shelby Philip",
+    first: "Shelby",
+    position: "Lead Agent",
+    role: "Insurance Agent · Vineland, NJ",
+    photo: "/assets/agent-headshot.png",
+    email: "onestopbenefit@gmail.com",
+    creds: ["NJ Licensed", "#1561192"],
+    blurb:
+      "I'm Shelby, a local insurance agent here in Vineland. My job is simple: help you figure out what coverage actually fits your life — your car, your home, your business, or the people who depend on you. I'll walk you through your options in plain English so you know exactly what you're paying for.",
+    specialties: [
+      "Auto & Home bundles",
+      "Life & financial planning",
+      "Small-business coverage",
+      "Renters & condo",
+    ],
+  },
+  {
+    id: "sini",
+    name: "Sini S Philip",
+    first: "Sini",
+    position: "Manager",
+    role: "Health Insurance Agent / Producer",
+    photo: "/assets/sini.png",
+    email: "siniphilip74@gmail.com",
+    creds: ["PharmD", "BCPS", "BCGP"],
+    blurb:
+      "I'm Sini, and I lead our health side. With a clinical pharmacy background, I help you make sense of medical coverage — comparing plans, decoding the fine print, and matching the right benefits and prescription coverage to your needs. From individual and family plans to Medicare options, I'll make sure your health coverage actually works for you.",
+    specialties: [
+      "Medical & health plans",
+      "Medicare options",
+      "Prescription drug coverage",
+      "Individual & family plans",
+    ],
+  },
+];
+
 export const mapsUrl =
   "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(AGENT.address);

@@ -42,11 +42,17 @@
 .header.lp-header .nav a { color: rgba(255,255,255,.82); }
 .header.lp-header .nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
 .header.lp-header .nav a.active { color: var(--glow-cyan); }
-/* emphasized Medical link reads as a cyan-tinted pill over the dark hero */
-.header.lp-header .nav a.nav-medical {
-  color: var(--glow-cyan); background: rgba(58,190,249,.12); border-color: rgba(58,190,249,.34);
+/* the animated Medical pill keeps its gradient over the dark hero, with a
+   brighter cyan glow ring so it pops against the transparent header */
+.header.lp-header .nav a.nav-medical { color: #fff; background: var(--brand-grad); border-color: transparent; }
+@media (prefers-reduced-motion: no-preference) {
+  .header.lp-header .nav a.nav-medical { animation: medPulseDark 2.6s ease-in-out infinite; }
 }
-.header.lp-header .nav a.nav-medical:hover { color: #fff; background: rgba(58,190,249,.22); border-color: rgba(58,190,249,.6); }
+.header.lp-header .nav a.nav-medical:hover { animation: none; }
+@keyframes medPulseDark {
+  0%, 100% { box-shadow: 0 4px 14px rgba(8,14,60,.5), 0 0 0 0 rgba(58,190,249,0); transform: translateY(0); }
+  50%      { box-shadow: 0 7px 20px rgba(8,14,60,.6), 0 0 0 6px rgba(58,190,249,.26); transform: translateY(-2px); }
+}
 .header.lp-header .nav-toggle { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: #fff; }
 
 .header.lp-header.scrolled {
@@ -212,43 +218,60 @@
 @keyframes bob { 0%,100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
 
 /* ===========================================================
-   TESTIMONIALS  (social-proof wall — replaces the old marquee)
+   TESTIMONIALS  (compact edge-faded marquee)
    =========================================================== */
-.tlist-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 52px; }
-.tlist-stat { display: flex; flex-direction: column; align-items: center; margin-bottom: 18px; }
+.tlist { overflow: hidden; }
+.tlist-head { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 44px; }
+.tlist-stat { display: flex; flex-direction: column; align-items: center; margin-bottom: 16px; }
 .tlist-num {
-  font-size: clamp(54px, 9vw, 96px); font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+  font-size: clamp(48px, 8vw, 84px); font-weight: 700; letter-spacing: -0.04em; line-height: 1;
   background: linear-gradient(90deg, #3ABEF9 0%, #9bdcff 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .tlist-num-label { margin-top: 8px; font-size: 14px; font-weight: 600; letter-spacing: .02em; color: rgba(255,255,255,.66); }
-.tlist-head .xtitle { max-width: none; }
+.tlist-head .xtitle { max-width: none; font-size: clamp(28px, 4vw, 46px); }
 .tlist-head .xtitle .hl { color: var(--glow-cyan); }
 
-/* masonry wall via CSS columns — varied-length cards tile naturally */
-.tlist-wall { columns: 3; column-gap: 22px; }
-.tlist-cell { break-inside: avoid; margin-bottom: 22px; display: block; }
-.tcard {
-  position: relative; margin: 0; padding: 26px 24px 22px;
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
-  border-radius: 20px; transition: transform .25s ease, background .25s ease, border-color .25s ease;
+/* marquee: two rows, opposite directions, faded/blurred at both edges */
+.tmar {
+  display: flex; flex-direction: column; gap: 18px; margin: 4px 0 36px;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
-.tcard:hover { transform: translateY(-5px); background: rgba(58,190,249,.07); border-color: rgba(58,190,249,.4); }
-.tcard-mark { position: absolute; top: 6px; right: 20px; font-size: 64px; line-height: 1; font-weight: 700; color: rgba(58,190,249,.18); pointer-events: none; }
-.tcard blockquote { margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.9); letter-spacing: -0.01em; position: relative; }
-.tcard figcaption { display: flex; align-items: center; gap: 12px; }
+.tmar-row { display: flex; overflow: hidden; }
+.tmar-track {
+  display: flex; gap: 18px; width: max-content; padding-left: 18px;
+  animation: tmarScroll 60s linear infinite;
+}
+.tmar-row.rev .tmar-track { animation-direction: reverse; animation-duration: 72s; }
+.tmar:hover .tmar-track, .tmar.is-paused .tmar-track { animation-play-state: paused; }
+
+.tcard {
+  flex: none; width: 360px; margin: 0; padding: 22px 24px;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+  background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 18px; transition: background .25s ease, border-color .25s ease;
+}
+.tcard:hover { background: rgba(58,190,249,.08); border-color: rgba(58,190,249,.45); }
+.tcard blockquote { margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.88); letter-spacing: -0.01em; }
+.tcard figcaption { display: flex; align-items: center; gap: 11px; }
 .tcard-avatar {
-  width: 42px; height: 42px; border-radius: 50%; flex: none; display: grid; place-items: center;
-  font-size: 17px; font-weight: 700; color: #fff; background: var(--brand-grad);
+  width: 38px; height: 38px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  font-size: 16px; font-weight: 700; color: #fff; background: var(--brand-grad);
 }
 .tcard-id { display: flex; flex-direction: column; line-height: 1.3; }
-.tcard-id b { font-size: 14.5px; font-weight: 700; color: #fff; }
-.tcard-id span { font-size: 12.5px; color: rgba(255,255,255,.55); }
-.tlist-foot { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 18px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.6); }
+.tcard-id b { font-size: 14px; font-weight: 700; color: #fff; }
+.tcard-id span { font-size: 12px; color: rgba(255,255,255,.55); }
+
+.tlist-foot { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 14px; font-weight: 600; color: rgba(255,255,255,.6); }
 .tlist-foot svg { width: 17px; height: 17px; color: var(--glow-cyan); }
 
-@media (max-width: 980px) { .tlist-wall { columns: 2; } }
-@media (max-width: 620px) { .tlist-wall { columns: 1; } }
+@keyframes tmarScroll { to { transform: translateX(-50%); } }
+@media (max-width: 560px) { .tcard { width: 80vw; } }
+@media (prefers-reduced-motion: reduce) {
+  .tmar-track { animation: none; flex-wrap: wrap; }
+  .tmar { mask-image: none; -webkit-mask-image: none; }
+}
 
 /* ===========================================================
    FEATURED MEDICAL  (lead coverage offering, ahead of gallery)
