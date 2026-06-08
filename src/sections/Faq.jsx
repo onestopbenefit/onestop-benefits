@@ -12,6 +12,8 @@ const FAQS = [
     a: `${AGENT.apptHours}. Send an appointment request with a date and time, and I'll confirm what works. Requests outside those hours get a reply the next business day.` },
   { q: "How do I file a claim or get help fast?",
     a: "Call or text me directly and I'll walk you through it — then follow up with the carrier until it's resolved." },
+  { q: "What if I can't reach the office?",
+    a: `If the office line (${AGENT.phone}) doesn't go through, call or text our backup line at ${AGENT.altPhone} and we'll get back to you as soon as we can.` },
 ];
 
 export default function Faq() {

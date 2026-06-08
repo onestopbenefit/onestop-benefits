@@ -18,6 +18,9 @@ export const AGENT = {
   // Phone is also textable. Raw values power tel:/sms: links.
   phoneRaw: "8563625273",
   phone: "(856) 362-5273",
+  // Backup line — used if the office number doesn't go through (see FAQ).
+  altPhoneRaw: "2672437044",
+  altPhone: "(267) 243-7044",
   faxRaw: "8568390193",
   fax: "(856) 839-0193",
 
@@ -45,7 +48,7 @@ export const TEAM = [
     role: "Insurance Agent · Vineland, NJ",
     photo: "/assets/agent-headshot.png",
     email: "onestopbenefit@gmail.com",
-    creds: ["NJ Licensed", "#1561192"],
+    creds: ["NJ Licensed #1561192", "E.A", "MBA"],
     blurb:
       "I'm Shelby, a local insurance agent here in Vineland. My job is simple: help you figure out what coverage actually fits your life — your car, your home, your business, or the people who depend on you. I'll walk you through your options in plain English so you know exactly what you're paying for.",
     specialties: [

@@ -50,7 +50,12 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+/* `clip` contains any stray horizontal overflow (decorative orbs, the coverage
+   track, marquees) without becoming a scroll container — so it can't break the
+   pinned coverage section or the sticky sidebars the way `overflow: hidden` would. */
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { overflow-x: clip; }
+img { max-width: 100%; }
 
 body {
   margin: 0;

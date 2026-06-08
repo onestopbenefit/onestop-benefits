@@ -375,16 +375,19 @@
    HORIZONTAL PRODUCT GALLERY  (behind giant word)
    =========================================================== */
 .hgal { position: relative; background: radial-gradient(120% 100% at 50% 0%, #0a1556 0%, #060a26 65%); color: #fff; }
-.hgal-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: center; }
-.hgal-head { position: absolute; top: 0; left: 0; right: 0; padding: calc(var(--header-h) + 60px) 0 0; z-index: 3; }
+/* Head and track sit in normal flow from the top of the pinned viewport, so
+   the gap between the heading and the cards is fixed rather than drifting with
+   viewport height. */
+.hgal-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start; }
+.hgal-head { position: relative; padding: calc(var(--header-h) + 46px) 0 0; z-index: 3; }
 .hgal-head .xeyebrow { margin-bottom: 18px; }
 .hgal-head .xtitle { margin-top: 6px; max-width: 17ch; }
 .hgal-giant {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -54%);
+  position: absolute; top: 52%; left: 50%; transform: translate(-50%, -50%);
   font-size: clamp(120px, 30vw, 460px); font-weight: 700; letter-spacing: -0.05em;
   color: rgba(255,255,255,.06); white-space: nowrap; pointer-events: none; z-index: 1; line-height: 1;
 }
-.hgal-track { display: flex; gap: 24px; margin-top: 56px; padding: 0 max(28px, calc((100vw - var(--maxw)) / 2)); position: relative; z-index: 2; will-change: transform; backface-visibility: hidden; }
+.hgal-track { display: flex; gap: 24px; margin-top: 44px; padding: 0 max(28px, calc((100vw - var(--maxw)) / 2)); position: relative; z-index: 2; will-change: transform; backface-visibility: hidden; }
 .pgcard {
   flex: none; width: 320px; height: 380px; border-radius: 22px; padding: 28px;
   background: linear-gradient(165deg, rgba(58,190,249,.16), rgba(20,48,207,.1));
