@@ -2,8 +2,9 @@ import { useState, useCallback } from "react";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Hero from "./sections/Hero.jsx";
-import Marquee from "./sections/Marquee.jsx";
+import Testimonials from "./sections/Testimonials.jsx";
 import Statement from "./sections/Statement.jsx";
+import MedicalFeature from "./sections/MedicalFeature.jsx";
 import Products from "./sections/Products.jsx";
 import Steps from "./sections/Steps.jsx";
 import AppointmentForm from "./sections/AppointmentForm.jsx";
@@ -14,7 +15,7 @@ import Contact from "./sections/Contact.jsx";
 import { PREFILL_MAP } from "./data/products.js";
 import { useScrollSpy } from "./hooks/useScrollSpy.js";
 
-const SPY_IDS = ["products", "quote", "about", "contact"];
+const SPY_IDS = ["products", "medical", "quote", "about", "contact"];
 
 export default function App() {
   const [prefill, setPrefill] = useState({ ids: [], nonce: 0 });
@@ -40,8 +41,9 @@ export default function App() {
       <Header active={active} onNav={scrollToId} onQuote={goQuote} />
       <main className="lp">
         <Hero onQuote={goQuote} onContact={goContact} />
-        <Marquee />
+        <Testimonials />
         <Statement />
+        <MedicalFeature onPick={pickProduct} />
         <Products onPick={pickProduct} />
         <Steps onQuote={goQuote} />
         <AppointmentForm prefill={prefill} />

@@ -55,4 +55,10 @@ export const PRODUCT_ICONS = {
   auto: IcAuto, home: IcHome, renters: IcRenters, life: IcLife,
   business: IcBusiness, condo: IcCondo, umbrella: IcUmbrella,
   bundle: IcBundle, bundle2: IcBundle2, moto: IcMoto, financial: IcFinancial,
+  medical: IcMedical,
+};
+
+/* Benefit icons addressable by name (used by the featured Medical grid). */
+export const ICON_BY_NAME = {
+  IcUser, IcShield, IcMedical, IcCheck, IcText, IcLife, IcHandshake, IcClock,
 };

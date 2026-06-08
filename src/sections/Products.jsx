@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import Reveal from "../components/Reveal.jsx";
 import { PRODUCTS } from "../data/products.js";
-import { PRODUCT_ICONS, IcShield, IcArrow, IcMedical } from "../components/icons.jsx";
+import { PRODUCT_ICONS, IcShield, IcArrow } from "../components/icons.jsx";
 
 /* Cards slide horizontally as you scroll the pinned section (videinfra-style).
    On touch / small screens it falls back to a native horizontal scroller (CSS). */
@@ -74,13 +74,6 @@ export default function Products({ onPick }) {
               </button>
             );
           })}
-          <div className="pgcard soon" aria-label="Medical coverage — coming soon">
-            <span className="pg-soon">Coming soon</span>
-            <span className="pgic"><IcMedical /></span>
-            <h3>Medical</h3>
-            <p>Health coverage is on the way — check back soon, or ask me about it.</p>
-            <span className="go">Coming soon</span>
-          </div>
           <button className="pgcard end" onClick={() => onPick(null)} aria-label="Get a quote">
             <span className="pgic"><IcShield /></span>
             <h3>Not sure what you need?</h3>

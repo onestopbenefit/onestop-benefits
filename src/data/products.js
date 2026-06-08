@@ -1,9 +1,44 @@
 /* ============================================================
-   Products & navigation. Lines reflect the verified brief:
+   Products & navigation.
    Auto, Home, Renters, Condo, Life, Business, Auto+Home,
    Auto+Renters, Motorcycle & Recreational, Umbrella, Financial.
-   (No "Health" / "Employee Benefits" — not offered.)
+   Medical is now the LEAD offering (see MEDICAL / MEDICAL_BENEFITS
+   below) and is featured ahead of the gallery on the page.
    ============================================================ */
+
+/* Lead offering — Medical Insurance. Featured ahead of the coverage
+   gallery. Benefit categories are modeled on the way major medical
+   carriers (e.g. Humana) group plan benefits, with original copy. */
+export const MEDICAL = {
+  id: "medical",
+  name: "Medical Insurance",
+  tagline: "Now offering health coverage",
+  short: "Real health coverage with a real person behind it.",
+  long: "Individual, family, and Medicare-related health plans — chosen with you, not sold to you. I compare carriers, explain the trade-offs in plain English, and stay your point of contact long after you enroll.",
+};
+
+/* 6 benefit categories shown in the featured Medical grid.
+   Icons reference keys in icons.jsx (PRODUCT_ICONS / UI icons). */
+export const MEDICAL_BENEFITS = [
+  { icon: "IcUser",
+    title: "Doctor & specialist visits",
+    body: "Primary care, specialists, and urgent care with predictable copays — so seeing the right provider never means guessing at the cost." },
+  { icon: "IcShield",
+    title: "Hospital & emergency care",
+    body: "Inpatient stays, surgery, and emergency-room coverage that protects your savings when the unexpected lands you in a hospital bed." },
+  { icon: "IcMedical",
+    title: "Prescription drugs",
+    body: "Pharmacy benefits with tiered copays and mail-order options, reviewed against your medications so refills stay affordable." },
+  { icon: "IcCheck",
+    title: "Preventive care & screenings",
+    body: "Annual physicals, immunizations, and routine screenings covered at no extra cost — care that catches problems early, before they grow." },
+  { icon: "IcText",
+    title: "Virtual & behavioral health",
+    body: "24/7 telehealth visits plus mental-health and counseling coverage, so support is there whether you need it at 2pm or 2am." },
+  { icon: "IcLife",
+    title: "Dental, vision & wellness",
+    body: "Add-on dental and vision plus wellness and fitness perks that reward staying healthy — the everyday extras a good plan should include." },
+];
 
 export const PRODUCTS = [
   { id: "auto", name: "Auto", icon: "auto",
@@ -55,6 +90,7 @@ export const PRODUCTS = [
 /* The appointment-form checkboxes — exactly the brief's set, in its order.
    At least one is required to submit. */
 export const FORM_PRODUCTS = [
+  { id: "medical", label: "Medical" },
   { id: "auto", label: "Auto" },
   { id: "home", label: "Home" },
   { id: "life", label: "Life" },
@@ -68,18 +104,15 @@ export const FORM_PRODUCTS = [
 
 /* Clicking a showcase card pre-checks the matching form product(s). */
 export const PREFILL_MAP = {
+  medical: ["medical"],
   auto: ["auto"], home: ["home"], renters: ["renters"], condo: ["condo"],
   life: ["life"], business: ["business"], moto: ["moto"], umbrella: ["umbrella"],
   financial: ["financial"], bundle1: ["auto", "home"], bundle2: ["auto", "renters"],
 };
 
-export const MARQUEE = [
-  "Auto", "Home", "Renters", "Condo", "Life", "Business",
-  "Umbrella", "Motorcycle", "Boat & RV", "Financial", "Auto + Home",
-];
-
 export const NAV_LINKS = [
   { id: "top", label: "Home" },
   { id: "products", label: "Insurance" },
+  { id: "medical", label: "Medical", emphasis: true },
   { id: "about", label: "About" },
 ];
