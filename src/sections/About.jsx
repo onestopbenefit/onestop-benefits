@@ -38,7 +38,7 @@ export default function About({ onQuote, onContact }) {
           <div className="about-banner-grid team-panel" key={person.id}>
             <div className="about-banner-text">
               <span className="team-position">{person.position}</span>
-              <h1>{person.name}</h1>
+              <h2>{person.name}</h2>
               <p className="role">{person.role}</p>
               <div className="about-chips">
                 {person.creds.map((c) => <span key={c}><IcShield /> {c}</span>)}
@@ -69,18 +69,18 @@ export default function About({ onQuote, onContact }) {
 
           <aside className="about-side">
             <div className="fact-card">
-              <h4>Role</h4>
+              <h3>Role</h3>
               <div className="big">{person.position}</div>
               <p style={{ fontSize: "13.5px", color: "var(--muted)", marginTop: "6px" }}>{person.role}</p>
             </div>
             <div className="fact-card">
-              <h4>Credentials</h4>
+              <h3>Credentials</h3>
               <div className="chips">
                 {person.creds.map((c) => <span key={c} className="chip">{c}</span>)}
               </div>
             </div>
             <div className="fact-card">
-              <h4>Specialties</h4>
+              <h3>Specialties</h3>
               <ul className="spec-list">
                 {person.specialties.map((s) => <li key={s}><IcCheck /> {s}</li>)}
               </ul>

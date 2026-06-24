@@ -16,16 +16,16 @@ export default function Footer({ onNav, onQuote }) {
           </div>
 
           <div className="footer-col">
-            <h4>Explore</h4>
-            <a onClick={() => onNav("top")}>Home</a>
-            <a onClick={() => onNav("products")}>Insurance Products</a>
-            <a onClick={() => onNav("about")}>About</a>
-            <a onClick={() => onNav("contact")}>Contact</a>
-            <a onClick={onQuote}>Get a Quote</a>
+            <h3>Explore</h3>
+            <a href="/" onClick={(e) => { e.preventDefault(); onNav("top"); }}>Home</a>
+            <a href="#products" onClick={(e) => { e.preventDefault(); onNav("products"); }}>Insurance Products</a>
+            <a href="#about" onClick={(e) => { e.preventDefault(); onNav("about"); }}>About</a>
+            <a href="#contact" onClick={(e) => { e.preventDefault(); onNav("contact"); }}>Contact</a>
+            <a href="#quote" onClick={(e) => { e.preventDefault(); onQuote(); }}>Get a Quote</a>
           </div>
 
           <div className="footer-col">
-            <h4>Contact</h4>
+            <h3>Contact</h3>
             <a href={`tel:+1${AGENT.phoneRaw}`}>{AGENT.phone}</a>
             {AGENT.email && <a href={`mailto:${AGENT.email}`}>{AGENT.email}</a>}
             <span className="li">{AGENT.address}</span>

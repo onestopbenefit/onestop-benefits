@@ -31,6 +31,7 @@ export default function Hero({ onQuote, onContact }) {
         <h1 className="xhead">
           <span className="line"><span>Insurance you can</span></span>
           <RotatingWord />
+          <span className="sr-only"> — Onestop Benefits, an independent insurance agent in Vineland, NJ for auto, home, life, health and business coverage.</span>
         </h1>
         <p className="xhero-sub">
           A dedicated local agent in Vineland, NJ for auto, home, life, and business —

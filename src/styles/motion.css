@@ -90,7 +90,7 @@
 /* full-bleed agent photo behind the hero text */
 .xhero-photo {
   position: absolute; inset: 0; z-index: 0;
-  background: url("/assets/agent-hero.png") no-repeat;
+  background: url("/assets/agent-hero.webp") no-repeat;
   background-size: cover; background-position: 80% center;
 }
 /* Person image — soft slide-in entrance (transform+opacity, one-shot). */

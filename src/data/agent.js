@@ -12,8 +12,8 @@ export const AGENT = {
   title: "Insurance Agent in Vineland, NJ",
   tagline: "Shelby Philip — Insurance Agent",
 
-  photo: "/assets/agent-headshot.png",
-  heroPhoto: "/assets/agent-hero.png",
+  photo: "/assets/agent-headshot.webp",
+  heroPhoto: "/assets/agent-hero.webp",
 
   // Phone is also textable. Raw values power tel:/sms: links.
   phoneRaw: "8563625273",
@@ -46,7 +46,7 @@ export const TEAM = [
     first: "Shelby",
     position: "Lead Agent",
     role: "Insurance Agent · Vineland, NJ",
-    photo: "/assets/agent-headshot.png",
+    photo: "/assets/agent-headshot.webp",
     email: "onestopbenefit@gmail.com",
     creds: ["NJ Licensed #1561192", "E.A", "MBA"],
     blurb:
@@ -64,7 +64,7 @@ export const TEAM = [
     first: "Sini",
     position: "Manager",
     role: "Health Insurance Agent / Producer",
-    photo: "/assets/sini.png",
+    photo: "/assets/sini.webp",
     email: "siniphilip74@gmail.com",
     creds: ["PharmD", "BCPS", "BCGP"],
     blurb:

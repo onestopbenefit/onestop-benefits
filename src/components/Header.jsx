@@ -14,11 +14,15 @@ export default function Header({ active, onNav, onQuote }) {
   // close the mobile menu whenever the active section changes
   useEffect(() => { setOpen(false); }, [active]);
 
-  const go = (id) => () => {
+  const go = (id) => (e) => {
+    if (e) e.preventDefault();
     setOpen(false);
     if (id === "quote") onQuote();
     else onNav(id);
   };
+
+  // real, crawlable hrefs for the in-page nav anchors
+  const hrefFor = (id) => (id === "top" ? "/" : `#${id}`);
 
   const cls = "header lp-header" + ((scrolled || open) ? " scrolled" : "");
 
@@ -33,6 +37,7 @@ export default function Header({ active, onNav, onQuote }) {
           {NAV_LINKS.map((l) => (
             <a
               key={l.id}
+              href={hrefFor(l.id)}
               className={
                 (active === l.id ? "active" : "") + (l.emphasis ? " nav-medical" : "")
               }
@@ -60,7 +65,7 @@ export default function Header({ active, onNav, onQuote }) {
       {open && (
         <div className="mobile-menu">
           {NAV_LINKS.map((l) => (
-            <a key={l.id} className={l.emphasis ? "mob-medical" : ""} onClick={go(l.id)}>
+            <a key={l.id} href={hrefFor(l.id)} className={l.emphasis ? "mob-medical" : ""} onClick={go(l.id)}>
               {l.label}
               {l.emphasis && <em>New</em>}
             </a>
